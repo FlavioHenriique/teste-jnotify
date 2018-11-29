@@ -1,19 +1,26 @@
-package br.edu.ifpb.teste.jnotify;
+package br.edu.ifpb.teste.jnotify.protocolo;
 
-import br.edu.ifpb.teste.jnotify.protocolo.Comunicacao;
-import br.edu.ifpb.teste.jnotify.protocolo.ComunicacaoIMPL;
 import net.contentobjects.jnotify.JNotify;
 import net.contentobjects.jnotify.JNotifyException;
 import net.contentobjects.jnotify.JNotifyListener;
 
-public class App {
+public class Notificacoes extends Thread {
 
-    private static String arquivo1 = "/home/flavio/compartilhada/arquivo1.txt";
-    private static String arquivo2 = "/home/flavio/compartilhada2/arquivo2.txt";
-    private static Comunicacao comunicacao;
+    private Comunicacao comunicacao;
+    private String arquivo1;
+    private String arquivo2;
 
-    public static void main(String[] args) {
+    public Notificacoes(String arquivo1, String arquivo2) {
+        this.arquivo1 = arquivo1;
+        this.arquivo2 = arquivo2;
+    }
 
+    @Override
+    public void run() {
+        notificar();
+    }
+
+    public void notificar() {
         comunicacao = new ComunicacaoIMPL(arquivo1, arquivo2);
 
         int mask = JNotify.FILE_CREATED
@@ -41,7 +48,7 @@ public class App {
                     System.out.println("Arquivo renomeado: " + s2);
                 }
             });
-            System.out.println("Monitorando a pasta ...");
+            System.out.println("Monitorando o arquivo " + arquivo1);
             while (true) {
 
             }

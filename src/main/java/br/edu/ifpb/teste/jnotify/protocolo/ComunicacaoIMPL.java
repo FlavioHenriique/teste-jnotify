@@ -45,8 +45,10 @@ public class ComunicacaoIMPL implements Comunicacao {
 
             if (atual != null) {
                 Mensagem msg = gson.fromJson(atual, Mensagem.class);
-                msg.setDataHoraEntrega(new Date());
-                escrever(msg, arquivo2);
+                if (msg.getDataHoraEntrega() == null) {
+                    msg.setDataHoraEntrega(new Date());
+                    escrever(msg, arquivo2);
+                }
                 return msg.getTexto();
             }
         } catch (FileNotFoundException ex) {

@@ -4,7 +4,7 @@ import br.edu.ifpb.teste.jnotify.protocolo.Comunicacao;
 import br.edu.ifpb.teste.jnotify.protocolo.ComunicacaoIMPL;
 import java.util.Scanner;
 
-public class Teste {
+public class EscreveNo2 {
 
     private static Comunicacao comunicacao;
 
@@ -12,7 +12,7 @@ public class Teste {
         String arquivo1 = "/home/flavio/compartilhada/arquivo1.txt";
         String arquivo2 = "/home/flavio/compartilhada2/arquivo2.txt";
 
-        comunicacao = new ComunicacaoIMPL(arquivo1, arquivo2);
+        comunicacao = new ComunicacaoIMPL(arquivo2, arquivo1);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

@@ -35,6 +35,7 @@ public class App {
                     System.out.println("Arquivo renomeado: " + s2);
                 }
             });
+            System.out.println("Monitorando a pasta ...");
             while (true) {
 
             }

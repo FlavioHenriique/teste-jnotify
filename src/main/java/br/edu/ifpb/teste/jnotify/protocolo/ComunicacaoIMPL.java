@@ -1,6 +1,7 @@
 package br.edu.ifpb.teste.jnotify.protocolo;
 
 import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -48,6 +49,7 @@ public class ComunicacaoIMPL implements Comunicacao {
                 if (msg.getDataHoraEntrega() == null) {
                     msg.setDataHoraEntrega(new Date());
                     escrever(msg, arquivo2);
+                    System.out.println("MOdificação no arquivo: " + msg.getTexto());
                 }
                 return msg.getTexto();
             }

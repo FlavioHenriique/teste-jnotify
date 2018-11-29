@@ -41,7 +41,7 @@ public class Notificacoes extends Thread {
                 }
 
                 public void fileModified(int i, String s, String s1) {
-                    System.out.println("Modificação do arquivo: " + comunicacao.receber());
+                    comunicacao.receber();
                 }
 
                 public void fileRenamed(int i, String s, String s1, String s2) {

@@ -8,11 +8,13 @@ import net.contentobjects.jnotify.JNotifyListener;
 
 public class App {
 
-    private static Comunicacao comunicacao = new ComunicacaoIMPL();
+    private static String arquivo1 = "/home/flavio/compartilhada/arquivo1.txt";
+    private static String arquivo2 = "/home/flavio/compartilhada2/arquivo2.txt";
+    private static Comunicacao comunicacao;
 
     public static void main(String[] args) {
 
-        String path = "/home/flavio/compartilhada/arquivo1.txt";
+        comunicacao = new ComunicacaoIMPL(arquivo1, arquivo2);
 
         int mask = JNotify.FILE_CREATED
                 | JNotify.FILE_MODIFIED
@@ -22,7 +24,7 @@ public class App {
 
         try {
 
-            int watchID = JNotify.addWatch(path, mask, watch, new JNotifyListener() {
+            int watchID = JNotify.addWatch(arquivo1, mask, watch, new JNotifyListener() {
                 public void fileCreated(int i, String s, String s1) {
                     System.out.println("Arquivo criado: " + s1);
                 }
@@ -32,7 +34,7 @@ public class App {
                 }
 
                 public void fileModified(int i, String s, String s1) {
-                    System.out.println("Modificação do arquivo: "+ comunicacao.receber());
+                    System.out.println("Modificação do arquivo: " + comunicacao.receber());
                 }
 
                 public void fileRenamed(int i, String s, String s1, String s2) {

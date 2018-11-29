@@ -11,11 +11,9 @@ import java.util.Date;
 
 public class ComunicacaoIMPL implements Comunicacao {
 
-    //-Djava.library.path=/home/flavio/Downloads/jnotify-lib-0.94/
-
-    
-    private String arquivo1 = "/home/flavio/compartilhada/arquivo1.txt";
-    private String arquivo2 = "/home/flavio/compartilhada2/arquivo2.txt";
+    //-Djava.library.path=/home/flavio/Downloads/jnotify-lib-0.94
+    private String arquivo1;
+    private String arquivo2;
     private Gson gson;
 
     public ComunicacaoIMPL(String path, String minhaPasta) {
@@ -24,28 +22,14 @@ public class ComunicacaoIMPL implements Comunicacao {
         gson = new Gson();
     }
 
-    public ComunicacaoIMPL() {
-        gson = new Gson();
-    }
-
     @Override
     public void enviar(String texto) {
-
         Mensagem msg = new Mensagem();
         msg.setTexto(texto);
         msg.setDataHoraEnvio(new Date());
         msg.setDataHoraEntrega(null);
 
-        BufferedWriter buffWrite;
-        try {
-            buffWrite = new BufferedWriter(new FileWriter(arquivo1, true));
-
-            buffWrite.write(gson.toJson(msg) + "\n");
-
-            buffWrite.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        escrever(msg, arquivo1);
     }
 
     @Override
@@ -60,7 +44,10 @@ public class ComunicacaoIMPL implements Comunicacao {
             }
 
             if (atual != null) {
-                return gson.fromJson(atual, Mensagem.class).getTexto();
+                Mensagem msg = gson.fromJson(atual, Mensagem.class);
+                msg.setDataHoraEntrega(new Date());
+                escrever(msg, arquivo2);
+                return msg.getTexto();
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -68,6 +55,17 @@ public class ComunicacaoIMPL implements Comunicacao {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    private void escrever(Mensagem msg, String arquivo) {
+        BufferedWriter buffWrite;
+        try {
+            buffWrite = new BufferedWriter(new FileWriter(arquivo, true));
+            buffWrite.write(gson.toJson(msg) + "\n");
+            buffWrite.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

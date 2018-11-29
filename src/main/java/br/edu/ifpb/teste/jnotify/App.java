@@ -1,14 +1,18 @@
 package br.edu.ifpb.teste.jnotify;
 
+import br.edu.ifpb.teste.jnotify.protocolo.Comunicacao;
+import br.edu.ifpb.teste.jnotify.protocolo.ComunicacaoIMPL;
 import net.contentobjects.jnotify.JNotify;
 import net.contentobjects.jnotify.JNotifyException;
 import net.contentobjects.jnotify.JNotifyListener;
 
 public class App {
 
+    private static Comunicacao comunicacao = new ComunicacaoIMPL();
+
     public static void main(String[] args) {
 
-        String path = "/home/flavio/compartilhada";
+        String path = "/home/flavio/compartilhada/arquivo1.txt";
 
         int mask = JNotify.FILE_CREATED
                 | JNotify.FILE_MODIFIED
@@ -28,7 +32,7 @@ public class App {
                 }
 
                 public void fileModified(int i, String s, String s1) {
-                    System.out.println("Arquivo modificado: " + s1);
+                    System.out.println("Modificação do arquivo: "+ comunicacao.receber());
                 }
 
                 public void fileRenamed(int i, String s, String s1, String s2) {

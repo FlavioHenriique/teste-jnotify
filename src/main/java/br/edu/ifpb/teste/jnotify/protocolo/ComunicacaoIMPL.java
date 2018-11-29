@@ -11,6 +11,9 @@ import java.util.Date;
 
 public class ComunicacaoIMPL implements Comunicacao {
 
+    //-Djava.library.path=/home/flavio/Downloads/jnotify-lib-0.94/
+
+    
     private String arquivo1 = "/home/flavio/compartilhada/arquivo1.txt";
     private String arquivo2 = "/home/flavio/compartilhada2/arquivo2.txt";
     private Gson gson;

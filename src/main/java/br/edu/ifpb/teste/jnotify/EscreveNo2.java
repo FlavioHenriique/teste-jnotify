@@ -2,6 +2,8 @@ package br.edu.ifpb.teste.jnotify;
 
 import br.edu.ifpb.teste.jnotify.protocolo.Comunicacao;
 import br.edu.ifpb.teste.jnotify.protocolo.ComunicacaoIMPL;
+import br.edu.ifpb.teste.jnotify.protocolo.Notificacoes;
+
 import java.util.Scanner;
 
 public class EscreveNo2 {
@@ -12,7 +14,10 @@ public class EscreveNo2 {
         String arquivo1 = "/run/user/1000/gvfs/smb-share:server=matheus-inspiron-5566.local,share=compartilhada/matheus.txt";
         String arquivo2 = "/home/flavio/ADS/compart/flavio.txt";
 
-        comunicacao = new ComunicacaoIMPL(arquivo2, arquivo1);
+        Notificacoes notificacoes = new Notificacoes(arquivo2, arquivo1);
+        notificacoes.start();
+
+        comunicacao = new ComunicacaoIMPL(arquivo1, arquivo2);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

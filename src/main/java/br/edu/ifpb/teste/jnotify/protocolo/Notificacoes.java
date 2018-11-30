@@ -43,10 +43,7 @@ public class Notificacoes extends Thread {
 
                 @Override
                 public void fileModified(int i, String s, String s1) {
-                    String recebida = comunicacao.receber();
-                    if (!anterior.equals(recebida)) {
-                        System.out.println("Mensagem: "+ recebida);
-                    }
+                    comunicacao.receber();
                 }
 
                 @Override

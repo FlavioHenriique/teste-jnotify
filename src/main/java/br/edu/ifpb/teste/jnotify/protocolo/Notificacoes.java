@@ -9,10 +9,12 @@ public class Notificacoes extends Thread {
     private Comunicacao comunicacao;
     private String arquivo1;
     private String arquivo2;
+    private String anterior;
 
     public Notificacoes(String arquivo1, String arquivo2) {
         this.arquivo1 = arquivo1;
         this.arquivo2 = arquivo2;
+        anterior = "";
     }
 
     @Override
@@ -41,7 +43,10 @@ public class Notificacoes extends Thread {
 
                 @Override
                 public void fileModified(int i, String s, String s1) {
-                    comunicacao.receber();
+                    String recebida = comunicacao.receber();
+                    if (!anterior.equals(recebida)) {
+                        System.out.println("Mensagem: "+ recebida);
+                    }
                 }
 
                 @Override

@@ -52,7 +52,7 @@ public class ComunicacaoIMPL implements Comunicacao {
                     msg.setDataHoraEntrega(new Date());
                     escrever(msg, arquivo2);
                     minhaUltima = msg;
-                    System.out.println("Modificação no arquivo: " + msg.getTexto());
+                    //System.out.println("Modificação no arquivo: " + msg.getTexto());
                     return msg.getTexto();
                 }
             }

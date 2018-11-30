@@ -21,7 +21,7 @@ public class EscreveNo1 {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Digite a mensagem:");
+            System.out.print("Digite a mensagem: ");
             String msg = scanner.next();
             if (!msg.equalsIgnoreCase("exit")) {
                 comunicacao.enviar(msg);

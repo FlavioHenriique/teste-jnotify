@@ -16,10 +16,12 @@ public class ComunicacaoIMPL implements Comunicacao {
     private String arquivo1;
     private String arquivo2;
     private Gson gson;
+    private Mensagem minhaUltima;
 
     public ComunicacaoIMPL(String path, String minhaPasta) {
         this.arquivo1 = path;
         this.arquivo2 = minhaPasta;
+        this.minhaUltima = new Mensagem();
         gson = new Gson();
     }
 
@@ -40,18 +42,19 @@ public class ComunicacaoIMPL implements Comunicacao {
             buffRead = new BufferedReader(new FileReader(arquivo1));
 
             String ultima, atual = null;
+
             while ((ultima = buffRead.readLine()) != null) {
                 atual = ultima;
             }
-
             if (atual != null) {
                 Mensagem msg = gson.fromJson(atual, Mensagem.class);
                 if (msg.getDataHoraEntrega() == null) {
                     msg.setDataHoraEntrega(new Date());
                     escrever(msg, arquivo2);
-                    System.out.println("MOdificação no arquivo: " + msg.getTexto());
+                    minhaUltima = msg;
+                    System.out.println("Modificação no arquivo: " + msg.getTexto());
+                    return msg.getTexto();
                 }
-                return msg.getTexto();
             }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -62,13 +65,16 @@ public class ComunicacaoIMPL implements Comunicacao {
     }
 
     private void escrever(Mensagem msg, String arquivo) {
-        BufferedWriter buffWrite;
-        try {
-            buffWrite = new BufferedWriter(new FileWriter(arquivo, true));
-            buffWrite.write(gson.toJson(msg) + "\n");
-            buffWrite.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+        if (!gson.toJson(msg).equals(gson.toJson(minhaUltima))) {
+            BufferedWriter buffWrite;
+            try {
+                buffWrite = new BufferedWriter(new FileWriter(arquivo, true));
+                buffWrite.write(gson.toJson(msg) + "\n");
+                buffWrite.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

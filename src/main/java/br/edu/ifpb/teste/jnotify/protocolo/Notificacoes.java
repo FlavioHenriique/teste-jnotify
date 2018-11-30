@@ -23,29 +23,30 @@ public class Notificacoes extends Thread {
     public void notificar() {
         comunicacao = new ComunicacaoIMPL(arquivo1, arquivo2);
 
-        int mask = JNotify.FILE_CREATED
-                | JNotify.FILE_MODIFIED
-                | JNotify.FILE_RENAMED
-                | JNotify.FILE_DELETED;
+        int mask = JNotify.FILE_MODIFIED;
         boolean watch = true;
 
         try {
 
             int watchID = JNotify.addWatch(arquivo1, mask, watch, new JNotifyListener() {
+                @Override
                 public void fileCreated(int i, String s, String s1) {
-                    System.out.println("Arquivo criado: " + s1);
+                    System.out.println("nada");
                 }
 
+                @Override
                 public void fileDeleted(int i, String s, String s1) {
-                    System.out.println("Arquivo deletado: " + s1);
+                    System.out.println("nada");
                 }
 
+                @Override
                 public void fileModified(int i, String s, String s1) {
                     comunicacao.receber();
                 }
 
+                @Override
                 public void fileRenamed(int i, String s, String s1, String s2) {
-                    System.out.println("Arquivo renomeado: " + s2);
+                    System.out.println("nada");
                 }
             });
             System.out.println("Monitorando o arquivo " + arquivo1);

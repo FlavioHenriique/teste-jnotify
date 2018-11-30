@@ -3,6 +3,7 @@ package br.edu.ifpb.teste.jnotify;
 import br.edu.ifpb.teste.jnotify.protocolo.Comunicacao;
 import br.edu.ifpb.teste.jnotify.protocolo.ComunicacaoIMPL;
 import br.edu.ifpb.teste.jnotify.protocolo.Notificacoes;
+
 import java.util.Scanner;
 
 public class EscreveNo1 {
